@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Access restricted</title>
+<style>
+  :root {
+    --hero: #1e1b4b;
+    --hero-2: #312e81;
+    --hero-text: #eef0ff;
+    --hero-dim: rgba(238, 240, 255, .62);
+    --accent: #fb7185;
+    --bg: #fafaf9;
+    --text: #1c1917;
+    --muted: #57534e;
+    --faint: #a8a29e;
+    --line: #e7e5e4;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12110f;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --faint: #6b6560;
+      --line: #292524;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    background: var(--bg);
+    color: var(--text);
+    font: 15px/1.6 var(--sans);
+  }
+
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 56px clamp(24px, 6vw, 80px);
+    display: flex; flex-direction: column; justify-content: space-between; gap: 40px;
+    color: var(--hero-text);
+    background:
+      radial-gradient(700px 500px at 110% 110%, rgba(251, 113, 133, .35), transparent 60%),
+      linear-gradient(160deg, var(--hero-2), var(--hero));
+  }
+  .hero::after {
+    /* oversized lock outline as a backdrop motif */
+    content: "";
+    position: absolute; right: -80px; top: 50%;
+    width: 420px; height: 420px;
+    transform: translateY(-50%);
+    background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-opacity='.07' stroke-width='1.2'%3E%3Crect x='4' y='10' width='16' height='11' rx='2'/%3E%3Cpath d='M8 10V7a4 4 0 0 1 8 0v3'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--hero-dim);
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+  h1 {
+    margin: 18px 0 0;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(44px, 7vw, 88px);
+    line-height: .98;
+    letter-spacing: -.02em;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .site {
+    position: relative; z-index: 1;
+    border-top: 1px solid rgba(255, 255, 255, .16);
+    padding-top: 18px;
+  }
+  .site-label { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--hero-dim); }
+  .site-host {
+    font-family: var(--serif);
+    font-size: clamp(26px, 3.4vw, 40px);
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+  .site-url { font-family: var(--mono); font-size: 13px; color: var(--hero-dim); overflow-wrap: anywhere; }
+
+  .side {
+    padding: 56px clamp(24px, 5vw, 64px);
+    display: flex; flex-direction: column; justify-content: center;
+    max-width: 620px;
+  }
+  .lead {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.2vw, 24px);
+    line-height: 1.4;
+    margin: 0 0 22px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+  .tags:empty { display: none; }
+  .tag {
+    font-size: 12px; font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--muted);
+  }
+  .radar { color: var(--muted); font-size: 14px; margin: 0 0 34px; }
+  .radar a { color: var(--text); font-weight: 600; text-decoration-color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+
+  h2 {
+    margin: 0 0 10px;
+    font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--faint);
+  }
+  dl { margin: 0; }
+  .row {
+    display: grid; grid-template-columns: 120px 1fr; gap: 16px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+  }
+  .row:last-child { border-bottom: 1px solid var(--line); }
+  dt { color: var(--muted); }
+  dd { margin: 0; font-family: var(--mono); font-size: 12.5px; overflow-wrap: anywhere; }
+
+  button {
+    align-self: flex-start;
+    margin-top: 22px;
+    font: 600 13px var(--sans);
+    color: #fff;
+    background: var(--hero);
+    border: 0;
+    border-radius: 999px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  @media (prefers-color-scheme: dark) { button { background: var(--accent); color: #1c0a10; } }
+  button:hover { filter: brightness(1.12); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  @media (max-width: 860px) {
+    body { grid-template-columns: 1fr; }
+    .hero { padding: 40px 20px 32px; gap: 32px; }
+    .hero::after { width: 260px; height: 260px; right: -60px; }
+    .side { padding: 32px 20px 40px; }
+    .row { grid-template-columns: 1fr; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <span class="eyebrow">Secure web gateway</span>
+      <h1 id="title">Access <em>restricted</em></h1>
+    </div>
+    <div class="site" id="site" hidden>
+      <div class="site-label">Site</div>
+      <div class="site-host" id="site-host"></div>
+      <div class="site-url" id="site-url"></div>
+    </div>
+  </header>
+
+  <main class="side" aria-labelledby="title">
+    <p class="lead">This site is blocked. Please contact your administrator for further assistance.</p>
+    <div class="tags" id="tags"></div>
+    <p class="radar" id="radar" hidden>Look up this site on <a id="radar-link" target="_blank" rel="noopener noreferrer">Cloudflare Radar</a> for more information.</p>
+
+    <h2>Details for your administrator</h2>
+    <dl id="info"></dl>
+    <button type="button" id="copy"><span id="copy-label">Copy details</span></button>
+  </main>
+
+<script src="context.js"></script>
+<script>
+(function () {
+  var c = window.BlockContext;
+  if (c.siteUri) {
+    document.getElementById("site-host").textContent = c.host;
+    document.getElementById("site-url").textContent = c.siteUri;
+    document.getElementById("site").hidden = false;
+  }
+  var tags = document.getElementById("tags");
+  c.categories.forEach(function (t) {
+    var s = document.createElement("span"); s.className = "tag"; s.textContent = t; tags.appendChild(s);
+  });
+  if (c.radarUrl) {
+    document.getElementById("radar-link").href = c.radarUrl;
+    document.getElementById("radar").hidden = false;
+  }
+  var dl = document.getElementById("info");
+  c.rows.forEach(function (r) {
+    var row = document.createElement("div"); row.className = "row";
+    var dt = document.createElement("dt"); dt.textContent = r[0];
+    var dd = document.createElement("dd"); dd.textContent = r[1];
+    row.appendChild(dt); row.appendChild(dd); dl.appendChild(row);
+  });
+  c.bindCopy(document.getElementById("copy"), document.getElementById("copy-label"), "Copy details");
+})();
+</script>
+</body>
+</html>

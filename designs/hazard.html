@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Access restricted</title>
+<style>
+  :root {
+    --yellow: #ffd60a;
+    --ink: #111111;
+    --paper: #f6f4ee;
+    --muted: #4a4a4a;
+    --line: #111111;
+    --sans: "Arial Black", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+    --body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #f6f4ee;
+      --paper: #121212;
+      --muted: #b5b5b5;
+      --line: #f6f4ee;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    background: var(--paper);
+    color: var(--ink);
+    font: 15px/1.55 var(--body);
+  }
+
+  .tape {
+    height: 34px;
+    flex: none;
+    background: repeating-linear-gradient(-45deg, var(--yellow) 0 22px, #111 22px 44px);
+    border-block: 3px solid #111;
+    overflow: hidden;
+    position: relative;
+  }
+  .tape span {
+    position: absolute; inset: 0;
+    display: flex; align-items: center;
+    white-space: nowrap;
+    font: 900 13px/1 var(--sans);
+    letter-spacing: .3em;
+    color: #111;
+    animation: slide 30s linear infinite;
+  }
+  .tape span b { background: var(--yellow); padding: 4px 14px; margin-right: 44px; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .tape span { animation: none; } }
+
+  main {
+    flex: 1;
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 20px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 28px 40px;
+    align-content: center;
+  }
+
+  .sign {
+    width: 128px; height: 128px;
+    display: grid; place-items: center;
+    background: var(--yellow);
+    color: #111;
+    border: 4px solid #111;
+    border-radius: 18px;
+    box-shadow: 8px 8px 0 #111;
+    transform: rotate(-4deg);
+  }
+  @media (prefers-color-scheme: dark) { .sign { box-shadow: 8px 8px 0 var(--yellow); border-color: var(--yellow); } }
+  .sign svg { width: 70px; height: 70px; }
+
+  .code {
+    display: inline-block;
+    font: 700 12px var(--mono);
+    letter-spacing: .12em;
+    padding: 4px 10px;
+    border: 2px solid var(--line);
+    margin-bottom: 14px;
+  }
+  h1 {
+    margin: 0;
+    font: 900 clamp(40px, 8vw, 84px)/.92 var(--sans);
+    text-transform: uppercase;
+    letter-spacing: -.02em;
+  }
+  h1 mark { display: inline-block; margin-top: .12em; background: var(--yellow); color: #111; padding: .04em .1em 0; }
+  .lead { font-size: 18px; margin: 18px 0 0; max-width: 560px; }
+
+  .site {
+    grid-column: 1 / -1;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px;
+    padding: 16px 20px;
+    border: 3px solid var(--line);
+    background: var(--paper);
+  }
+  .site-label { font: 900 12px var(--sans); letter-spacing: .2em; text-transform: uppercase; }
+  .site-url { font: 600 clamp(16px, 2.4vw, 22px) var(--mono); overflow-wrap: anywhere; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
+  .tag { font: 700 11px var(--body); text-transform: uppercase; letter-spacing: .08em; background: #111; color: var(--yellow); padding: 4px 8px; }
+  @media (prefers-color-scheme: dark) { .tag { background: var(--yellow); color: #111; } }
+
+  .grid {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    border-top: 3px solid var(--line);
+    border-left: 3px solid var(--line);
+  }
+  .cell {
+    padding: 12px 14px;
+    border-right: 3px solid var(--line);
+    border-bottom: 3px solid var(--line);
+    min-width: 0;
+  }
+  .cell dt { font: 900 11px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .cell dd { margin: 4px 0 0; font: 13px var(--mono); overflow-wrap: anywhere; }
+
+  .bottom {
+    grid-column: 1 / -1;
+    display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between;
+  }
+  .radar { margin: 0; color: var(--muted); }
+  .radar a { color: var(--ink); font-weight: 700; text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 4px; text-underline-offset: 2px; }
+  button {
+    font: 900 13px var(--sans);
+    letter-spacing: .12em; text-transform: uppercase;
+    color: #111;
+    background: var(--yellow);
+    border: 3px solid #111;
+    padding: 12px 22px;
+    box-shadow: 4px 4px 0 #111;
+    cursor: pointer;
+  }
+  @media (prefers-color-scheme: dark) { button { box-shadow: 4px 4px 0 var(--paper), 4px 4px 0 3px var(--yellow); } }
+  button:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #111; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+
+  @media (max-width: 640px) {
+    main { grid-template-columns: 1fr; padding: 32px 16px; gap: 22px; }
+    .sign { width: 88px; height: 88px; box-shadow: 5px 5px 0 #111; }
+    .sign svg { width: 48px; height: 48px; }
+    .tags { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="tape" aria-hidden="true"><span id="tape"></span></div>
+
+  <main aria-labelledby="title">
+    <div class="sign" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>
+      </svg>
+    </div>
+    <div>
+      <div class="code">ERR · ACCESS DENIED</div>
+      <h1 id="title">Access <mark>restricted</mark></h1>
+      <p class="lead">This site is blocked. Please contact your administrator for further assistance.</p>
+    </div>
+
+    <div class="site" id="site" hidden>
+      <span class="site-label">Site</span>
+      <span class="site-url" id="site-url"></span>
+      <span class="tags" id="tags"></span>
+    </div>
+
+    <dl class="grid" id="info"></dl>
+
+    <div class="bottom">
+      <p class="radar" id="radar" hidden>Look up this site on <a id="radar-link" target="_blank" rel="noopener noreferrer">Cloudflare Radar</a> for more information.</p>
+      <button type="button" id="copy"><span id="copy-label">Copy details</span></button>
+    </div>
+  </main>
+
+  <div class="tape" aria-hidden="true"></div>
+
+<script src="context.js"></script>
+<script>
+(function () {
+  var c = window.BlockContext;
+
+  var tape = document.getElementById("tape");
+  for (var i = 0; i < 16; i++) {
+    var b = document.createElement("b"); b.textContent = "ACCESS RESTRICTED"; tape.appendChild(b);
+  }
+
+  if (c.siteUri) {
+    document.getElementById("site-url").textContent = c.siteUri;
+    document.getElementById("site").hidden = false;
+  }
+  var tags = document.getElementById("tags");
+  c.categories.forEach(function (t) {
+    var s = document.createElement("span"); s.className = "tag"; s.textContent = t; tags.appendChild(s);
+  });
+  if (c.radarUrl) {
+    document.getElementById("radar-link").href = c.radarUrl;
+    document.getElementById("radar").hidden = false;
+  }
+  var dl = document.getElementById("info");
+  c.rows.forEach(function (r) {
+    var cell = document.createElement("div"); cell.className = "cell";
+    var dt = document.createElement("dt"); dt.textContent = r[0];
+    var dd = document.createElement("dd"); dd.textContent = r[1];
+    cell.appendChild(dt); cell.appendChild(dd); dl.appendChild(cell);
+  });
+  c.bindCopy(document.getElementById("copy"), document.getElementById("copy-label"), "Copy details");
+})();
+</script>
+</body>
+</html>
