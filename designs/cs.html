@@ -16,6 +16,9 @@
     --soft: #f9fafb;
     --accent: #dc2626;
     --link: #111827;
+    --accent-soft: rgba(220, 38, 38, .08);
+    --glow: rgba(220, 38, 38, .07);
+    --dot: rgba(17, 24, 39, .09);
     --mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
     color-scheme: light;
   }
@@ -29,6 +32,9 @@
       --soft: #141416;
       --accent: #f87171;
       --link: #f3f4f6;
+      --accent-soft: rgba(248, 113, 113, .12);
+      --glow: rgba(248, 113, 113, .09);
+      --dot: rgba(255, 255, 255, .07);
       color-scheme: dark;
     }
   }
@@ -41,7 +47,23 @@
     color: var(--text);
     font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
+    position: relative;
+    overflow-x: hidden;
   }
+  /* soft glow + dot grid that fades out below the header */
+  body::before {
+    content: "";
+    position: absolute; inset: 0 0 auto 0;
+    height: 520px;
+    background:
+      radial-gradient(520px 300px at 50% 0%, var(--glow), transparent 70%),
+      radial-gradient(var(--dot) 1px, transparent 1.4px) 0 0 / 22px 22px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  main, footer { position: relative; z-index: 1; }
   main {
     flex: 1;
     width: 100%;
@@ -52,14 +74,27 @@
   }
 
   .icon {
-    width: 44px; height: 44px;
+    position: relative;
+    width: 60px; height: 60px;
     display: grid; place-items: center;
+    background: var(--bg);
     border: 1px solid var(--line);
-    border-radius: 12px;
+    border-radius: 16px;
     color: var(--accent);
-    margin-bottom: 28px;
+    margin: 10px 0 34px 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 8px 24px -8px var(--glow);
   }
-  .icon svg { width: 22px; height: 22px; }
+  /* concentric rings behind the badge */
+  .icon::before, .icon::after {
+    content: "";
+    position: absolute;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    inset: -10px;
+    z-index: -1;
+  }
+  .icon::after { inset: -22px; border-radius: 30px; opacity: .55; }
+  .icon svg { width: 30px; height: 30px; }
 
   h1 {
     margin: 0 0 10px;
@@ -72,14 +107,48 @@
 
   .site {
     margin-top: 32px;
-    padding: 16px 0;
-    border-block: 1px solid var(--line);
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px;
+    background: var(--soft);
+    border: 1px solid var(--line);
+    border-radius: 14px;
   }
+  .site-icon {
+    position: relative;
+    flex: none;
+    width: 40px; height: 40px;
+    display: grid; place-items: center;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--muted);
+  }
+  .site-icon svg { width: 20px; height: 20px; }
+  .site-x {
+    position: absolute; right: -5px; bottom: -5px;
+    width: 18px; height: 18px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: 2px solid var(--soft);
+  }
+  .site-x svg { width: 9px; height: 9px; }
+  .site-meta { min-width: 0; flex: 1; }
   .label {
+    display: flex; align-items: center; gap: 8px;
     font-size: 12px;
     font-weight: 500;
     color: var(--faint);
     margin-bottom: 2px;
+  }
+  .pill {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 0 8px;
+    border-radius: 999px;
   }
   .site-url { font-family: var(--mono); font-size: 15px; overflow-wrap: anywhere; }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
@@ -88,7 +157,7 @@
     font-size: 12px;
     padding: 2px 10px;
     border-radius: 999px;
-    background: var(--soft);
+    background: var(--bg);
     border: 1px solid var(--line);
     color: var(--muted);
   }
@@ -162,8 +231,9 @@
 <body>
 <main aria-labelledby="title">
   <div class="icon" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2.8 19.5 5.6v5.9c0 4.6-3.1 8.6-7.5 9.7-4.4-1.1-7.5-5.1-7.5-9.7V5.6z" fill="var(--accent-soft)"/>
+      <rect x="8.6" y="10.6" width="6.8" height="5.4" rx="1.2"/><path d="M10.2 10.6V9.2a1.8 1.8 0 0 1 3.6 0v1.4"/>
     </svg>
   </div>
 
@@ -171,14 +241,24 @@
   <p class="lead">Tato stránka je blokována. Pro další pomoc kontaktujte svého správce.</p>
 
   <div class="site" id="site" hidden>
-    <div class="label">Stránka</div>
-    <div class="site-url" id="site-url"></div>
-    <div class="tags" id="tags"></div>
+    <div class="site-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/>
+      </svg>
+      <span class="site-x">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg>
+      </span>
+    </div>
+    <div class="site-meta">
+      <div class="label">Stránka <span class="pill">Blokováno</span></div>
+      <div class="site-url" id="site-url"></div>
+      <div class="tags" id="tags"></div>
+    </div>
   </div>
 
   <p class="radar" id="radar" hidden>Více informací o této stránce najdete na <a id="radar-link" target="_blank" rel="noopener noreferrer">Cloudflare Radar</a>.</p>
 
-  <details id="details" open>
+  <details id="details">
     <summary>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
       Technické údaje
