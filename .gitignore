@@ -9,3 +9,5 @@ Thumbs.db
 *.log
 
 .claude/
+node_modules/
+.wrangler/
