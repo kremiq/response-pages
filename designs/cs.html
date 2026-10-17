@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Přístup omezen</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #111827;
+    --muted: #6b7280;
+    --faint: #9ca3af;
+    --line: #e5e7eb;
+    --soft: #f9fafb;
+    --accent: #dc2626;
+    --link: #111827;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0b0b0c;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --faint: #6b7280;
+      --line: #232326;
+      --soft: #141416;
+      --accent: #f87171;
+      --link: #f3f4f6;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    flex: 1;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 72px 20px 40px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+  .icon {
+    width: 44px; height: 44px;
+    display: grid; place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+  .icon svg { width: 22px; height: 22px; }
+
+  h1 {
+    margin: 0 0 10px;
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 650;
+    letter-spacing: -.025em;
+  }
+  .lead { margin: 0; color: var(--muted); }
+
+  .site {
+    margin-top: 32px;
+    padding: 16px 0;
+    border-block: 1px solid var(--line);
+  }
+  .label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--faint);
+    margin-bottom: 2px;
+  }
+  .site-url { font-family: var(--mono); font-size: 15px; overflow-wrap: anywhere; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tags:empty { display: none; }
+  .tag {
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--soft);
+    border: 1px solid var(--line);
+    color: var(--muted);
+  }
+
+  .radar { margin: 18px 0 0; font-size: 14px; color: var(--muted); }
+  .radar a {
+    color: var(--link);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 3px;
+  }
+  .radar a:hover { text-decoration-color: currentColor; }
+
+  details { margin-top: 36px; }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 500;
+    color: var(--muted);
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover { color: var(--text); }
+  summary svg { width: 14px; height: 14px; transition: transform .2s; }
+  details[open] summary svg { transform: rotate(90deg); }
+
+  dl { margin: 14px 0 0; font-size: 13px; }
+  .row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 12px;
+    padding: 8px 0;
+    border-top: 1px solid var(--line);
+  }
+  .row:last-child { border-bottom: 1px solid var(--line); }
+  dt { color: var(--muted); }
+  dd { margin: 0; font-family: var(--mono); font-size: 12.5px; overflow-wrap: anywhere; }
+
+  button {
+    margin-top: 14px;
+    font: inherit; font-size: 13px; font-weight: 500;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 7px 14px;
+    cursor: pointer;
+  }
+  button:hover { background: var(--soft); }
+  summary:focus-visible, button:focus-visible, a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  footer {
+    padding: 24px 20px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--faint);
+  }
+
+  @media (max-width: 480px) {
+    main { padding-top: 48px; }
+    h1 { font-size: 26px; }
+    .row { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>
+</head>
+<body>
+<main aria-labelledby="title">
+  <div class="icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>
+    </svg>
+  </div>
+
+  <h1 id="title">Přístup omezen</h1>
+  <p class="lead">Tato stránka je blokována. Pro další pomoc kontaktujte svého správce.</p>
+
+  <div class="site" id="site" hidden>
+    <div class="label">Stránka</div>
+    <div class="site-url" id="site-url"></div>
+    <div class="tags" id="tags"></div>
+  </div>
+
+  <p class="radar" id="radar" hidden>Více informací o této stránce najdete na <a id="radar-link" target="_blank" rel="noopener noreferrer">Cloudflare Radar</a>.</p>
+
+  <details id="details" open>
+    <summary>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+      Technické údaje
+    </summary>
+    <dl id="info"></dl>
+    <button type="button" id="copy">Kopírovat údaje</button>
+  </details>
+</main>
+<footer>Chráněno službou Cloudflare Gateway</footer>
+
+<script src="context.js"></script>
+<script>
+(function () {
+  var c = window.BlockContext;
+  var labels = {
+    "Rule ID": "ID pravidla",
+    "Source IP": "Zdrojová IP",
+    "Time": "Čas",
+    "Blocked by": "Blokováno",
+    "Account ID": "ID účtu",
+    "User": "Uživatel",
+    "Device ID": "ID zařízení",
+    "Request ID": "ID požadavku",
+    "Query ID": "ID dotazu",
+    "Connection ID": "ID spojení"
+  };
+  var filters = {
+    "HTTP policy": "HTTP pravidlo",
+    "DNS policy": "DNS pravidlo",
+    "Antivirus": "Antivirová kontrola",
+    "Network policy": "Síťové pravidlo"
+  };
+  var now = new Date();
+  var time = now.toLocaleString("cs-CZ", {
+    timeZone: "UTC", day: "numeric", month: "long", year: "numeric",
+    hour: "2-digit", minute: "2-digit", second: "2-digit"
+  }) + " UTC";
+
+  var rows = c.rows.map(function (r) {
+    var v = r[0] === "Time" ? time : r[0] === "Blocked by" ? (filters[r[1]] || r[1]) : r[1];
+    return [labels[r[0]] || r[0], v];
+  });
+
+  document.title = c.host ? "Přístup omezen · " + c.host : "Přístup omezen";
+
+  if (c.siteUri) {
+    document.getElementById("site-url").textContent = c.siteUri;
+    document.getElementById("site").hidden = false;
+  }
+  var tags = document.getElementById("tags");
+  c.categories.forEach(function (t) {
+    var s = document.createElement("span"); s.className = "tag"; s.textContent = t; tags.appendChild(s);
+  });
+  if (c.radarUrl) {
+    document.getElementById("radar-link").href = c.radarUrl;
+    document.getElementById("radar").hidden = false;
+  }
+
+  var dl = document.getElementById("info");
+  rows.forEach(function (r) {
+    var row = document.createElement("div"); row.className = "row";
+    var dt = document.createElement("dt"); dt.textContent = r[0];
+    var dd = document.createElement("dd"); dd.textContent = r[1];
+    row.appendChild(dt); row.appendChild(dd); dl.appendChild(row);
+  });
+
+  var btn = document.getElementById("copy");
+  btn.addEventListener("click", function () {
+    var text = (c.siteUri ? ["Stránka: " + c.siteUri] : [])
+      .concat(rows.map(function (r) { return r[0] + ": " + r[1]; }))
+      .join("\n");
+    c.copy(text).then(
+      function () { btn.textContent = "Zkopírováno"; },
+      function () { btn.textContent = "Kopírování selhalo"; }
+    ).then(function () {
+      setTimeout(function () { btn.textContent = "Kopírovat údaje"; }, 1800);
+    });
+  });
+})();
+</script>
+</body>
+</html>
